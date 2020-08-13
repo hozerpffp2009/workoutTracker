@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 // Create new table called cardio
-const workoutSchema = new Schema({
+const workouts = new Schema({
     cardio_name: {
         type: String,
         trim: true,
@@ -43,6 +43,6 @@ const workoutSchema = new Schema({
     },
 });
 
-const Workouts = mongoose.model("Workout", workoutSchema);
-// export cardio
+const Workouts = mongoose.model("Workouts", workouts);
+// export Workouts
 module.exports = Workouts;

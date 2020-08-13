@@ -6,22 +6,34 @@ const Workout = require("../models/workoutSchema");
 router.post("/api/workouts", ({
     body
 }, res) => {
-    Cardio.create(body)
-        .then(dbWorkout => {
-            res.json(dbWorkout);
+    Workout.create(body)
+        .then(res => {
+            res.json(res);
         })
         .catch(err => {
             res.status(400).json(err);
         });
 });
 
+router.get("/api/workouts/:id", (req, res) => {
+    Workout.find({})
+        .sort({
+            id: -1
+        })
+        .then(res => {
+            res.json(res);
+        })
+        .catch(err => {
+            res.status(400).json(err);
+        });
+});
 // insert many post for workout table
 router.post("/api/workouts/bulk", ({
     body
 }, res) => {
     Workout.insertMany(body)
-        .then(dbWorkout => {
-            res.json(dbWorkout);
+        .then(res => {
+            res.json(res);
         })
         .catch(err => {
             res.status(400).json(err);
@@ -34,8 +46,8 @@ router.get("/api/workouts", (req, res) => {
         .sort({
             date: -1
         })
-        .then(dbWorkout => {
-            res.json(dbWorkout);
+        .then(res => {
+            res.json(res);
         })
         .catch(err => {
             res.status(400).json(err);
