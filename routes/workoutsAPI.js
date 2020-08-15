@@ -3,49 +3,44 @@ const Workout = require("../models/workoutSchema");
 
 
 // post call for workout table
-router.post("/api/workouts", ({
-    body
-}, res) => {
-    Workout.create(body)
-        .then(res => {
-            res.json(res);
-        })
+router.post("/api/workouts", (req, res) => {
+    Workout.create({})
+        .then(data => res.json(data))
         .catch(err => {
-            res.status(400).json(err);
+            res.json(err)
         });
 });
 
-router.get("/api/workouts/:id", (req, res) => {
-    Workout.find({})
-        .sort({
-            id: -1
-        })
-        .then(res => {
-            res.json(res);
-        })
-        .catch(err => {
-            res.status(400).json(err);
-        });
-});
-// insert many post for workout table
-router.post("/api/workouts/bulk", ({
-    body
-}, res) => {
-    Workout.insertMany(body)
-        .then(res => {
-            res.json(res);
-        })
-        .catch(err => {
-            res.status(400).json(err);
-        });
-});
-
-// get route for workout
 router.get("/api/workouts", (req, res) => {
     Workout.find({})
-        .sort({
-            date: -1
+        .then(data => res.json(data))
+        .catch(err => {
+            res.json(err)
+        });
+});
+
+router.put("/api/workouts/:id", ({
+    body,
+    params
+}, res) => {
+    Workout.findByIdAndUpdate(
+            params.id, {
+                $push: {
+                    exercises: body
+                }
+            }, {
+                new: true,
+                runValidators: true
+            }
+        )
+        .then(data => res.json(data))
+        .catch(err => {
+            res.json(err)
         })
+});
+
+router.get("/api/workouts/range", (req, res) => {
+    Workout.find({})
         .then(res => {
             res.json(res);
         })

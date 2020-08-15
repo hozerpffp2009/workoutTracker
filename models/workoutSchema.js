@@ -2,47 +2,34 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 // Create new table called cardio
-const workouts = new Schema({
-    cardio_name: {
-        type: String,
-        trim: true,
-        required: "Enter user name"
-    },
-    distance: {
-        type: Number,
-        required: "Enter number of miles ran"
-    },
-    duration: {
-        type: Number,
-        required: "Enter number of minutes spent"
-    },
-    date: {
+const workoutSchema = new Schema({
+    exercises: [{
+
+        type: {
+            type: String,
+            trim: true,
+            required: "Enter an exercise type"
+        },
+        name: {
+            type: String,
+            trim: true,
+            required: "Enter user name"
+        },
+        duration: {
+            type: Number,
+            required: "Enter number of minutes spent"
+        },
+        weight: Number,
+        reps: Number,
+        sets: Number,
+        distance: Number
+    }],
+    day: {
         type: Date,
         default: Date.now
-    },
-    name: {
-        type: String,
-        trim: true,
-        required: "Enter exercise name"
-    },
-    weight: {
-        type: Number,
-        required: "Enter number of minutes spent"
-    },
-    sets: {
-        type: Number,
-        required: "Enter number of sets completed"
-    },
-    reps: {
-        type: Number,
-        required: "Enter number of reps completed"
-    },
-    resistance_duration: {
-        type: Number,
-        required: "Enter number of minutes spent"
-    },
+    }
 });
 
-const Workouts = mongoose.model("Workouts", workouts);
-// export Workouts
-module.exports = Workouts;
+const Workout = mongoose.model("Workout", workoutSchema);
+// export Workout
+module.exports = Workout;
