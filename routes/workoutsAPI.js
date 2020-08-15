@@ -1,8 +1,7 @@
 const router = require("express").Router();
 const Workout = require("../models/workoutSchema");
 
-
-// post call for workout table
+// assort data into api workouts db
 router.post("/api/workouts", (req, res) => {
     Workout.create({})
         .then(data => res.json(data))
@@ -11,6 +10,7 @@ router.post("/api/workouts", (req, res) => {
         });
 });
 
+// request data from workouts db
 router.get("/api/workouts", (req, res) => {
     Workout.find({})
         .then(data => res.json(data))
@@ -19,6 +19,7 @@ router.get("/api/workouts", (req, res) => {
         });
 });
 
+// update data in workouts by id
 router.put("/api/workouts/:id", ({
     body,
     params
@@ -39,6 +40,7 @@ router.put("/api/workouts/:id", ({
         })
 });
 
+// request data from workouts/ range
 router.get("/api/workouts/range", (req, res) => {
     Workout.find({})
         .then(res => {
@@ -49,4 +51,5 @@ router.get("/api/workouts/range", (req, res) => {
         });
 });
 
+// export router
 module.exports = router;

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-// Create new table called cardio
+// Create new table called workoutSchema
 const workoutSchema = new Schema({
     exercises: [{
 
