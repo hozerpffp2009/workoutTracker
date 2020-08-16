@@ -19,6 +19,9 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
     useFindAndModify: false
 });
 
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.connect(MONGODB_URI);
+
 // Routes
 app.use(require("./routes/workoutsAPI.js"));
 app.use(require("./routes/html-routes.js"))
